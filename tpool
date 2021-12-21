@@ -1,0 +1,89 @@
+[1mdiff --git a/Properties/AssemblyInfo.cs b/Properties/AssemblyInfo.cs[m
+[1mindex 6802062..f09850f 100644[m
+[1m--- a/Properties/AssemblyInfo.cs[m
+[1m+++ b/Properties/AssemblyInfo.cs[m
+[36m@@ -13,7 +13,7 @@[m [musing System.Runtime.InteropServices;[m
+ [assembly: AssemblyTrademark("")][m
+ [assembly: AssemblyCulture("")][m
+ [m
+[31m-//[m
+[32m+[m[32m// !! Assembly version will be set by build process[m
+ // Version information for an assembly consists of the following four values:[m
+ //[m
+ //      Major Version[m
+[36m@@ -24,14 +24,10 @@[m [musing System.Runtime.InteropServices;[m
+ // You can specify all the values or you can default the Revision and Build Numbers[m
+ // by using the '*' as shown below:[m
+ /*[assembly: AssemblyInformationalVersion("1.1.1")]*/[m
+[31m-[assembly: AssemblyVersion("1.1.1.*")][m
+[31m-[m
+ // Setting ComVisible to false makes the types in this assembly not visible [m
+ // to COM components.  If you need to access a type in this assembly from [m
+ // COM, set the ComVisible attribute to true on that type.[m
+ [assembly: ComVisible(false)][m
+ [m
+ // The following GUID is for the ID of the typelib if this project is exposed to COM[m
+[31m-[assembly: Guid("9ad32772-985c-408a-8293-6f8e93c70ce5")][m
+[31m-[assembly: AssemblyFileVersion("1.1.1")][m
+[31m-[m
+[32m+[m[32m[assembly: Guid("9ad32772-985c-408a-8293-6f8e93c70ce5")][m
+\ No newline at end of file[m
+[1mdiff --git a/Vigo.Bas.csproj b/Vigo.Bas.csproj[m
+[1mindex acb5eed..183a1c1 100644[m
+[1m--- a/Vigo.Bas.csproj[m
+[1m+++ b/Vigo.Bas.csproj[m
+[36m@@ -34,8 +34,9 @@[m
+     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">[m
+       <HintPath>packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>[m
+     </Reference>[m
+[31m-    <Reference Include="Microsoft.MetadirectoryServicesEx">[m
+[31m-      <HintPath>..\References\Microsoft.MetadirectoryServicesEx.dll</HintPath>[m
+[32m+[m[32m    <Reference Include="Microsoft.MetadirectoryServicesEx, Version=4.1.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">[m[41m[m
+[32m+[m[32m      <SpecificVersion>False</SpecificVersion>[m[41m[m
+[32m+[m[32m      <HintPath>lib\Microsoft.MetadirectoryServicesEx.dll</HintPath>[m[41m[m
+     </Reference>[m
+     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">[m
+       <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>[m
+[1mdiff --git a/azure-pipelines.yml b/azure-pipelines.yml[m
+[1mindex 44ca5a9..df87498 100644[m
+[1m--- a/azure-pipelines.yml[m
+[1m+++ b/azure-pipelines.yml[m
+[36m@@ -1,14 +1,11 @@[m
+ pool:[m
+[31m-  name: oab_testpool[m
+[31m-  demands: msbuild[m
+   vmImage: "windows-2019"[m
+ [m
+ #Made 20200319 based on the catalogue defined here: https://docs.microsoft.com/en-us/azure/devops/pipelines/tasks/tool/nuget?view=azure-devops[m
+ [m
+ #Adding this to make task access system_accesstoken[m
+ variables:[m
+[31m-  version_number: "1.0.1"[m
+[31m-  system_accesstoken: $(System.AccessToken)[m
+[32m+[m[32m  BuildConfiguration: 'Release'[m
+ [m
+ steps:[m
+ - task: NuGetToolInstaller@1[m
+[36m@@ -23,18 +20,18 @@[m [msteps:[m
+ - task: bool.update-assembly-info.update-assembly-info-task.update-assembly-info@2[m
+   displayName: 'Update Assembly: Vigo.Bas/Properties/AssemblyInfo.cs'[m
+   inputs:[m
+[31m-    assemblyInfoFiles: Vigo.Bas/Properties/AssemblyInfo.cs[m
+[32m+[m[32m    assemblyInfoFiles: ./Properties/AssemblyInfo.cs[m
+     company: 'VIGO IKS'[m
+     product: 'VIGO BAS'[m
+[31m-    informationalVersion: '$(Build.SourceBranchName)-$(Date:yyyy-dd-MMM).$(Build.BuildNumber)'[m
+[32m+[m[32m    informationalVersion: '$(Build.SourceBranchName)-$(Date:yyyy-dd-MMM).$(Build.BuildId)'[m
+     fileVersionMajor: '$(Date:yyyy)'[m
+     fileVersionMinor: '$(Date:MM)'[m
+     fileVersionBuild: '$(Date:dd)'[m
+[31m-    fileVersionRevision: '$(Rev:rr)'[m
+[32m+[m[32m    fileVersionRevision: '$(Build.BuildId)'[m
+     assemblyVersionMajor: '$(Date:yyyy)'[m
+     assemblyVersionMinor: '$(Date:MM)'[m
+     assemblyVersionBuild: '$(Date:dd)'[m
+[31m-    assemblyVersionRevision: '$(Rev:rr)'[m
+[32m+[m[32m    assemblyVersionRevision: '$(Build.BuildId)'[m
+ [m
+ - task: MSBuild@1[m
+   displayName: 'Build'[m
