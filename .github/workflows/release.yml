@@ -1,0 +1,38 @@
+name: build and publish
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+        
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.0.5
+        
+      - name: Navigate to Workspace
+        run: cd $GITHUB_WORKSPACE
+      
+      - name: Restore Packages
+        run: nuget restore Vigo.Bas.sln
+
+      - name: Build Solution
+        run: |
+          msbuild.exe Vigo.Bas.sln /p:platform="Any CPU" /p:configuration="Release"
+          
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.3.1
+        with:
+          name: vigobas-utilities-core
+          path: bin/Release/Vigo.Bas.dll
