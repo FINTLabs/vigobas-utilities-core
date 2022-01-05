@@ -37,14 +37,4 @@ jobs:
           name: vigobas-utilities-core
           path: bin/Release/Vigo.Bas.dll
 
-      - name: Get tag
-        id: get_tag
-        run: echo ::set-output name=ID::${GITHUB_REF/refs\/tags\//}
-
-      - name: Pack NuGet package
-        run: nuget.exe pack Vigo.Bas.csproj -NonInteractive -OutputDirectory $GITHUB_WORKSPACE/nuget -Properties Configuration=Release -Verbosity Detailed -Build -Version ${{steps.get_tag.ID}}
-        if: startsWith(github.ref, 'refs/tags/')
-
-      - name: Publish NuGet package
-        run:  nuget push $GITHUB_WORKSPACE/nuget/Vigo.Bas.${{steps.get_tag.ID}}.nupkg ${{ secrets.NUGET_TOKEN }} -Source https://api.nuget.org/v3/index.json
-        if: startsWith(github.ref, 'refs/tags/')
+      
