@@ -33,7 +33,7 @@ jobs:
         shell: bash
 
       - name: Pack NuGet package
-        run: nuget.exe pack Vigo.Bas.csproj -NonInteractive -OutputDirectory $GITHUB_WORKSPACE/nuget -Properties Configuration=Release -Verbosity Detailed -Build -Version ${{steps.get_tag.ID}}
+        run: nuget.exe pack Vigo.Bas.csproj -NonInteractive -OutputDirectory $GITHUB_WORKSPACE/nuget -Properties Configuration=Release -Verbosity Detailed -Build -Version ${{steps.get_tag.outputs.ID}}
         if: startsWith(github.ref, 'refs/tags/')
 
       - name: Publish NuGet package
