@@ -30,6 +30,7 @@ jobs:
       - name: Get tag
         id: get_tag
         run: echo ::set-output name=ID::${GITHUB_REF/refs\/tags\//}
+        shell: bash
 
       - name: Pack NuGet package
         run: nuget.exe pack Vigo.Bas.csproj -NonInteractive -OutputDirectory $GITHUB_WORKSPACE/nuget -Properties Configuration=Release -Verbosity Detailed -Build -Version ${{steps.get_tag.ID}}
