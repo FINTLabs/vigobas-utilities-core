@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyCompany("Vigo")]
 [assembly: AssemblyProduct("VigoBAS")]
-[assembly: AssemblyCopyright("Copyright © 2020 Vigo")]
+[assembly: AssemblyCopyright("Copyright © 2022 Vigo IKS")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,3 +31,5 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("9ad32772-985c-408a-8293-6f8e93c70ce5")]
+[assembly: AssemblyInformationalVersion("1.0.0")] //File version
+[assembly: AssemblyFileVersion("1.0.0")] //Product version
