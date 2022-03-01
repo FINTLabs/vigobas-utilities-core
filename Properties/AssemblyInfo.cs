@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyCompany("Vigo")]
 [assembly: AssemblyProduct("VigoBAS")]
-[assembly: AssemblyCopyright("Copyright © 2022 Vigo IKS")]
+[assembly: AssemblyCopyright("Copyright (C) 2022 Vigo IKS")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
