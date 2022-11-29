@@ -12,6 +12,11 @@ Updated dependencies
 - Newtonsoft.Json 13.0.2
 - System.Collections.Immutable 7.0.0
 
+### Features
+No new features
+### Bugfixes
+No bugfixes
+
 ## Version 1.0.2
 Updated dependencies
 - libphonenumber-csharp 8.12.57
