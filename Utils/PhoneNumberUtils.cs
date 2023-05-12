@@ -70,6 +70,11 @@ namespace Vigo.Bas.Utils.Phonenumber
                         formatedPhoneNumber = phoneUtil.Format(numberProto, PhoneNumberFormat.INTERNATIONAL);
                         break;
                     }
+                case PhonenumberType.HumanReadableNational:
+                    {
+                        formatedPhoneNumber = phoneUtil.Format(numberProto, PhoneNumberFormat.NATIONAL);
+                        break;
+                    }
                 case PhonenumberType.Mobile:
 
                     if (cleanedPhoneNumber.Length == 10)
@@ -135,7 +140,8 @@ namespace Vigo.Bas.Utils.Phonenumber
             MachineReadableType2,
             MachineReadableType3,
             AzureReadable,
-            HumanReadable
+            HumanReadable, 
+            HumanReadableNational
         }
     }
 }

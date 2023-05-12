@@ -150,5 +150,16 @@ namespace Vigo.Bas.ManagementAgent.Log
         {
             _log.Error(message, exception);
         }
+        public string GetLogFileFullPath ()
+        {
+            var rootAppender = ((Hierarchy)LogManager.GetRepository())
+                                         .Root.Appenders.OfType<FileAppender>()
+                                         .FirstOrDefault();
+
+            string filename = rootAppender != null ? rootAppender.File : string.Empty;
+
+            return filename;
+
+        }
     }
 }
