@@ -32,7 +32,7 @@ jobs:
           msbuild.exe Vigo.Bas.sln /p:platform="Any CPU" /p:configuration="Release"
           
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v4
         with:
           name: vigobas-utilities-core
           path: bin/Release/Vigo.Bas.dll
